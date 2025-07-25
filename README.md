@@ -26,7 +26,7 @@ A simple and clean task management web application built with Django. This app a
 
 ```bash
 git clone https://github.com/abh0x1/To-Do-App.git
-cd django-todo
+cd To-Do-App
 ```
 
 ### 2. Create and Activate Virtual Environment
