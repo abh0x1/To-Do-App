@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Task</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded shadow w-full max-w-md">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Edit Task</h2>
+    <form method="post" action="{% url 'edit_task' get_task.pk %}">
+      {% csrf_token %}
+      <textarea
+        name="task"
+        rows="4"
+        class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+      >{{ get_task.task }}</textarea>
+      <button
+        type="submit"
+        class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded"
+      >
+        Update Task
+      </button>
+      <a
+        href="{% url 'home' %}"
+        class="mt-2 inline-block text-blue-500 hover:underline text-sm text-center w-full"
+      >
+        Cancel
+      </a>
+    </form>
+  </div>
+</body>
+</html>

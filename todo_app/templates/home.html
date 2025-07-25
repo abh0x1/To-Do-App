@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TODO LIST - Home</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <div class="container mx-auto px-4">
+    <h3 class="pt-12 text-3xl text-center font-semibold">My TODO App</h3>
+
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Left column -->
+      <div class="space-y-4 max-h-[450px] overflow-y-auto">
+        <h4 class="text-xl font-semibold">My Day</h4>
+        <p class="text-sm text-gray-500">{% now "jS F Y" %}</p>
+
+        <!-- Loop through tasks -->
+        {% for task in tasks %}
+        <div class="bg-white shadow rounded p-4 flex justify-between items-start">
+          <span>{{ task.task }}</span> <!-- Adjust if task is string: use {{ task }} -->
+          <span class="space-x-2">
+            <a href="{% url 'mark_as_done' task.id %}" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm">
+              <i class="fa fa-check"></i> Mark as Done
+            </a>
+            <a href="{% url 'delete_task' task.id  %}" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
+              <i class="fa fa-trash"></i>
+            </a>
+            <a href="{% url 'edit_task' task.id %}" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">
+              <i class="fa fa-pencil"></i>
+            </a>
+          </span>
+        </div>
+        {% empty %}
+        <p class="text-gray-500">No tasks yet. Add one below!</p>
+        {% endfor %}
+      </div>
+
+<!-- Right column -->
+<div>
+  <h5 class="text-lg font-medium">Completed Tasks</h5>
+  <div class="space-y-2 mt-2 max-h-[450px] overflow-y-auto">
+    {% for task in completed_tasks %}
+    <div class="bg-white shadow rounded p-4 flex justify-between items-center">
+      <span class="line-through text-gray-600">{{ task.task }}</span>
+      <span class="space-x-2">
+      <a href="{% url 'mark_as_undone' task.id %}" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm">
+        <i class="fa fa-check"></i> Mark as Undone
+      </a>
+      <a href="{% url 'delete_task' task.id  %}" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
+        <i class="fa fa-trash"></i>
+      </a>
+      </span>
+    </div>
+    {% empty %}
+    <p class="text-gray-500">No completed tasks yet.</p>
+    {% endfor %}
+  </div>
+</div>
+
+
+    <!-- ToDo Form -->
+    <div class="fixed bottom-10 left-0 w-full flex justify-center">
+      <form action="{% url 'add' %}" method="post" class="flex items-center w-full max-w-xl space-x-2">
+        {% csrf_token %}
+        <textarea
+          name="task"
+          rows="2"
+          placeholder="Add a task (press Enter for new line)"
+          class="flex-grow px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
+        ></textarea>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded text-sm">
+          <i class="fa fa-plus"></i> Add
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
