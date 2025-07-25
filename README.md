@@ -15,6 +15,11 @@ A simple and clean task management web application built with Django. This app a
 
 ---
 
+## 📸 Screenshots
+
+### 🏠 Home Page
+![Home Page](screenshots/home.png)
+
 ## 🚀 Getting Started
 
 ### 1. Clone the Repository
