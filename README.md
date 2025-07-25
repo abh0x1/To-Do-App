@@ -25,7 +25,7 @@ A simple and clean task management web application built with Django. This app a
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/abh0x1/django-todo.git
+git clone https://github.com/abh0x1/To-Do-App.git
 cd django-todo
 ```
 
